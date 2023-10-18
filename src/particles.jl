@@ -1,7 +1,7 @@
 begin
-
-    import PhysicalConstants.CODATA2018: k_B as kb
     using LinearAlgebra
+
+    const kb = 1.380649e-23
 
     mutable struct Particle
         pos
@@ -43,7 +43,7 @@ begin
 
         for i = 1:N
             particles[i] = Particle()
-            get_vel(species.mass, T)
+            particles[i].vel = get_vel(T, species.mass)
         end
 
         return particles
