@@ -1,0 +1,4 @@
+name = "DSMC"
+uuid = "8326329c-ff1c-43cd-933f-ef0ca9f30f5b"
+authors = ["Leo Basov <leo.basov@dlr.de>"]
+version = "0.1.0"
