@@ -2,9 +2,7 @@ module DSMC
 
 include("particles.jl")
 
-export Particles
-export Particle
-export Species
+export create_particles
 
 greet() = print("Hello World!")
 
