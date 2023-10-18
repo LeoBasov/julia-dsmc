@@ -2,7 +2,7 @@ module DSMC
 
 include("particles.jl")
 
-export Ensemble
+export Particles
 export Particle
 export Species
 

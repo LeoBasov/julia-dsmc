@@ -1,11 +1,5 @@
 begin
 
-mutable struct Ensemble
-    particles
-    species
-    Ensemble() = new(Array{Particle}(undef, 0), Array{Species}(undef, 0))
-end
-
 mutable struct Particle
     pos
     vel
@@ -16,6 +10,12 @@ end
 mutable struct Species
     mass
     Species() = new(1.0)
+end
+
+mutable struct Particles
+    particles::Array{Particle}
+    species::Array{Species}
+    Particles() = new(Array{Particle}(undef, 0), Array{Species}(undef, 0))
 end
 
 function create_particles(species, T, N)
