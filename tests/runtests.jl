@@ -2,6 +2,8 @@ using Test
 using DSMC
 using LinearAlgebra
 
+include("test_grid.jl")
+
 function calc_T(particles, mass)
     e = 0.0
 

@@ -1,10 +1,10 @@
 mutable struct Box
-    x::Pair{AbstractFloat, AbstractFloat}
-    y::Pair{AbstractFloat, AbstractFloat}
-    z::Pair{AbstractFloat, AbstractFloat}
+    x::Array{AbstractFloat}
+    y::Array{AbstractFloat}
+    z::Array{AbstractFloat}
     vol::AbstractFloat
     function Box()
-        new(Pair(-0.5, 0.5), Pair(-0.5, 0.5), Pair(-0.5, 0.5), 1.0)
+        new([-0.5, 0.5], [-0.5, 0.5], [-0.5, 0.5], 1.0)
     end
 end
 
@@ -22,6 +22,33 @@ end
 
 function find_bounding_box(particles)
     box = Box()
+
+    box.x = [Inf, -Inf]
+    box.y = [Inf, -Inf]
+    box.z = [Inf, -Inf]
+
+    for part in particles
+        if part.pos[1] < box.x[1]
+            box.x[1] = part.pos[1]
+        end
+        if part.pos[1] > box.x[2]
+            box.x[2] = part.pos[1]
+        end
+
+        if part.pos[2] < box.y[1]
+            box.y[1] = part.pos[2]
+        end
+        if part.pos[2] > box.y[2]
+            box.y[2] = part.pos[2]
+        end
+
+        if part.pos[3] < box.z[1]
+            box.z[1] = part.pos[3]
+        end
+        if part.pos[3] > box.z[2]
+            box.z[2] = part.pos[3]
+        end
+    end
 
     return box
 end
