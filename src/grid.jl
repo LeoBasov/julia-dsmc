@@ -10,7 +10,12 @@ end
 
 mutable struct Cell
     box::Box
-    Cell() = new(Box())
+    root::Bool
+    parent::Int
+    children::Array{Int}
+    function Cell()
+        new(Box(), true, 0, Array{Int}(undef, 0))
+    end
 end
 
 mutable struct Grid
