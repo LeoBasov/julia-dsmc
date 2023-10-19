@@ -26,6 +26,18 @@ function test_find_bounding_box()
     @test box.z[2] == 0.0
 end
 
+function test_create_grid()
+    box = Box(-1.0, 3.0, -4.0, 5.0, -7.0, 9.0)
+    Nx = 11
+    Ny = 13
+    Nz = 15
+
+    grid = create_grid(box, Nx, Ny, Nz)
+
+    @test length(grid.cells) == Nx * Ny * Nz
+end
+
 @testset "grid" begin
     test_find_bounding_box()
+    test_create_grid()
 end

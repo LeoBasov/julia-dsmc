@@ -3,8 +3,14 @@ mutable struct Box
     y::Array{AbstractFloat}
     z::Array{AbstractFloat}
     vol::AbstractFloat
+
     function Box()
         new([-0.5, 0.5], [-0.5, 0.5], [-0.5, 0.5], 1.0)
+    end
+
+    function Box(xmin, xmax, ymin, ymax, zmin, zmax)
+        volume = (xmax - xmin) * (ymax - ymin) * (zmax - zmin)
+        new([xmin, xmax], [ymin, ymax], [-zmin, zmax], volume)
     end
 end
 
@@ -76,7 +82,7 @@ function create_grid(box, Nx, Ny, Nz)
     dy = (box.y[1] - box.y[2]) / Ny
     dz = (box.z[1] - box.z[2]) / Nz
 
-    for i = 1:Nx, j = 1:Nx, k = 1:Nz
+    for i = 1:Nx, j = 1:Ny, k = 1:Nz
         cell = Cell()
 
         cell.box.x[1] = box.x[1] + (i - 1) * dx
@@ -87,6 +93,8 @@ function create_grid(box, Nx, Ny, Nz)
 
         cell.box.z[1] = box.z[1] + (k - 1) * dz
         cell.box.z[2] = box.z[1] + k * dz
+
+        cell.box.vol = (cell.box.x[2] - cell.box.x[1]) * (cell.box.y[2] - cell.box.y[1]) * (cell.box.z[2] - cell.box.z[1])
 
         push!(grid.cells, cell)
     end
