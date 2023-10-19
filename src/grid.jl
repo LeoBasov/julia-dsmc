@@ -68,3 +68,28 @@ function build_grid(particles)
     grid = Grid()
     return grid
 end
+
+function create_grid(box, Nx, Ny, Nz)
+    grid = Grid()
+
+    dx = (box.x[1] - box.x[2]) / Nx
+    dy = (box.y[1] - box.y[2]) / Ny
+    dz = (box.z[1] - box.z[2]) / Nz
+
+    for i = 1:Nx, j = 1:Nx, k = 1:Nz
+        cell = Cell()
+
+        cell.box.x[1] = box.x[1] + (i - 1) * dx
+        cell.box.x[2] = box.x[1] + i * dx
+
+        cell.box.y[1] = box.y[1] + (j - 1) * dy
+        cell.box.y[2] = box.y[1] + j * dy
+
+        cell.box.z[1] = box.z[1] + (k - 1) * dz
+        cell.box.z[2] = box.z[1] + k * dz
+
+        push!(grid.cells, cell)
+    end
+
+    return grid
+end
