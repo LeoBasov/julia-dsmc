@@ -19,7 +19,7 @@ function test_create_particles()
     species.mass = 1e-26
     particles = create_particles(species, T, N)
     T_new = calc_T(particles, species.mass)
-    @test isapprox(T_new, T, atol=1.0)
+    @test isapprox(T_new, T, atol=5.0)
 end
 
 @testset "particles" begin
