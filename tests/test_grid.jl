@@ -35,6 +35,10 @@ function test_create_grid()
     grid = create_grid(box, Nx, Ny, Nz)
 
     @test length(grid.cells) == Nx * Ny * Nz
+
+    @test last(grid.cells).box.x[2] == box.x[2]
+    @test last(grid.cells).box.y[2] == box.y[2]
+    @test last(grid.cells).box.z[2] == box.z[2]
 end
 
 @testset "grid" begin
