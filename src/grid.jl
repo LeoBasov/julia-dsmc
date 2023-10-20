@@ -19,8 +19,9 @@ mutable struct Cell
     root::Bool
     parent::Int
     children::Array{Int}
+    particles::Array{Int}
     function Cell()
-        new(Box(), true, 0, Array{Int}(undef, 0))
+        new(Box(), true, 0, Array{Int}(undef, 0), Array{Int}(undef, 0))
     end
 end
 
@@ -100,4 +101,22 @@ function create_grid(box, Nx, Ny, Nz)
     end
 
     return grid
+end
+
+function is_inside(cell, position)
+    in_x = position[1] >= cell.box.x[1] && position[1] <= cell.box.x[2]
+    in_y = position[2] >= cell.box.y[1] && position[2] <= cell.box.y[2]
+    in_z = position[3] >= cell.box.z[1] && position[3] <= cell.box.z[2]
+    return in_x && in_y && in_z
+end
+
+function sort_particles!(grid, particles)
+    for i in eachindex(particles)
+        for cell in grid.cells
+            if is_inside(cell, particles[i].pos)
+                push!(particles.particles, i)
+                break
+            end
+        end
+    end
 end

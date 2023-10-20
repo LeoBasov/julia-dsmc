@@ -41,7 +41,23 @@ function test_create_grid()
     @test last(grid.cells).box.z[2] == box.z[2]
 end
 
+function test_sort_particles()
+    box = Box(-1.0, 3.0, -4.0, 5.0, -7.0, 9.0)
+    Nx = 11
+    Ny = 13
+    Nz = 15
+    species = DSMC.Species()
+    T = 300.0
+    N = 4
+    species.mass = 1e-26
+    particles = create_particles(species, T, N)
+
+    grid = create_grid(box, Nx, Ny, Nz)
+    sort_particles!(grid, particles)
+end
+
 @testset "grid" begin
     test_find_bounding_box()
     test_create_grid()
+    test_sort_particles()
 end
