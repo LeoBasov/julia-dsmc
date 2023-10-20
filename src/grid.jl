@@ -78,9 +78,9 @@ end
 function create_grid(box, Nx, Ny, Nz)
     grid = Grid()
 
-    dx = (box.x[1] - box.x[2]) / Nx
-    dy = (box.y[1] - box.y[2]) / Ny
-    dz = (box.z[1] - box.z[2]) / Nz
+    dx = (box.x[2] - box.x[1]) / Nx
+    dy = (box.y[2] - box.y[1]) / Ny
+    dz = (box.z[2] - box.z[1]) / Nz
 
     for i = 1:Nx, j = 1:Ny, k = 1:Nz
         cell = Cell()
